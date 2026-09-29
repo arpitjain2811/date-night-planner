@@ -31,7 +31,7 @@
  */
 
 var PLANNER_FOLDER = 'Date Night Planner';   // must match the planner's Drive folder
-var VERSION = '1.1.0';
+var VERSION = '1.2.0';
 
 var SLATE_RE = /^slate-(\d{4}-\d{2}-\d{2})\.json$/;
 var HISTORY_WEEKS = 26;       // weeks shown on the History tab
@@ -69,23 +69,52 @@ function doGet(e) {
       .setMimeType(ContentService.MimeType.JSON);
   }
 
-  var cfg = config_();
-  var slate = currentSlate_();
-  var photos = [];
-  try { photos = photoStrip_(slate.photoSeed || slate.weekId || 0, cfg); } catch (err) { photos = []; }
+  try {
+    var cfg = config_();
+    var slate = currentSlate_();
+    var photos = [];
+    try { photos = photoStrip_(slate.photoSeed || slate.weekId || 0, cfg); } catch (err) { photos = []; }
 
-  noteServed_(slate);
+    noteServed_(slate);
 
-  var html = pageHtml_({
-    slate: slate,
-    voters: cfg.voters,
-    title: cfg.title,
-    photos: photos
-  });
+    var html = pageHtml_({
+      slate: slate,
+      voters: cfg.voters,
+      title: cfg.title,
+      photos: photos
+    });
 
-  return HtmlService.createHtmlOutput(html)
-    .setTitle(cfg.title)
-    .addMetaTag('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover');
+    return HtmlService.createHtmlOutput(html)
+      .setTitle(cfg.title)
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover');
+
+  } catch (err) {
+    // Never show a raw script error: it looks broken, and some browsers keep
+    // showing it after the problem is gone. Show a calm page instead, and
+    // record the error where the planner can read it (page-status.json).
+    try { writeStatus_({ lastError: String(err), lastErrorAt: new Date().toISOString() }); } catch (e2) { /* ignore */ }
+    return HtmlService.createHtmlOutput(errorPage_())
+      .setTitle('Date Night')
+      .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  }
+}
+
+function errorPage_() {
+  var url = '';
+  try { url = ScriptApp.getService().getUrl(); } catch (err) { url = ''; }
+  return '<!DOCTYPE html><html><head><base target="_top"><meta charset="utf-8"><style>' +
+    'body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#faf8fa;color:#1c1a1d}' +
+    '@media (prefers-color-scheme:dark){body{background:#151216;color:#f1ecf2}}' +
+    '.w{max-width:420px;margin:18vh auto 0;padding:0 20px;text-align:center}h1{font-size:22px;margin:0 0 8px}' +
+    'p{color:#8a8290;margin:0 0 20px}a{display:inline-block;padding:12px 22px;border-radius:12px;background:#8a3b6b;color:#fff;text-decoration:none;font-weight:600}' +
+    '</style></head><body><div class="w"><h1>One moment\u2026</h1>' +
+    '<p>The page couldn\u2019t load this week\u2019s options just now. This is usually temporary.</p>' +
+    (url ? '<a href="' + url + '">Try again</a>' : '') + '</div></body></html>';
+}
+
+/** Called by the page to check for a newer slate without reloading. */
+function getSlate() {
+  return currentSlate_();
 }
 
 
@@ -232,8 +261,10 @@ function currentSlate_() {
   }
   return {
     weekId: todayId_(),
-    title: 'Nothing here yet',
-    subtitle: 'The planner will publish this week\u2019s options here.',
+    waiting: true,
+    eyebrow: 'Getting started',
+    title: 'Your first options are on the way',
+    subtitle: 'The planner is researching this week\u2019s ideas. This page fills itself in when they\u2019re ready, so there\u2019s no need to refresh.',
     context: [], options: [], bookAhead: []
   };
 }
@@ -687,6 +718,7 @@ var PAGE_CSS = [
   'textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg)}',
   'button.save{margin-top:10px;font:inherit;font-size:14.5px;font-weight:600;padding:10px 20px;border-radius:var(--r-sm);border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}',
   '.saved{font-size:13px;color:var(--green);font-weight:600;margin-left:10px}',
+  '.spin{width:22px;height:22px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 12px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}.small{font-size:13px}',
   '.foot{margin-top:22px;font-size:12.5px;color:var(--faint);line-height:1.65}.empty{text-align:center;padding:48px 16px;color:var(--faint)}',
   '.hsum{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;margin-bottom:14px;font-size:14px;color:var(--muted)}.hsum b{color:var(--ink)}',
   '.hweek{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:12px}',
@@ -713,7 +745,7 @@ var PAGE_BODY = [
   '<div class="tabs"><button id="tabWeek" class="on">This week</button><button id="tabHist">History</button></div>',
   '<div id="weekView"><div id="contextBox"></div><div id="alertBox"></div><div id="cards"></div>',
   '<div id="aheadBox"></div><div id="nudgeBox"></div>',
-  '<div class="outcome"><h2>What did you actually do?</h2>',
+  '<div class="outcome" id="outcomeBox"><h2>What did you actually do?</h2>',
   '<p>This is what teaches the planner most. Be blunt: \u201cwent, loved it\u201d, \u201cskipped all four, did X instead\u201d. Add as many as you like through the weekend; either of you can.</p>',
   '<div id="notesList"></div><textarea id="noteText" placeholder="We ended up\u2026"></textarea>',
   '<div><button class="save" id="saveNote">Add note</button><span class="saved" id="savedFlag" style="display:none">Added</span></div></div>',
@@ -754,7 +786,8 @@ var PAGE_JS = [
   ' $("contextBox").innerHTML=ctx.length?"<div class=\\"box\\"><h2>This week</h2>"+ctx.map(function(r){return "<div class=\\"row\\"><b>"+esc(r.label)+"</b><span>"+esc(r.value)+"</span></div>";}).join("")+"</div>":"";',
   ' $("alertBox").innerHTML=S.alert?"<div class=\\"alert\\">"+safe(S.alert)+"</div>":"";',
   ' var opts=S.options||[];',
-  ' if(!opts.length){$("cards").innerHTML="<div class=\\"empty\\">No options published yet.<br>The weekly run will fill this in.</div>";}',
+  ' $("outcomeBox").hidden=!opts.length;',
+  ' if(!opts.length){$("cards").innerHTML="<div class=\\"empty\\"><div class=\\"spin\\"></div>Researching this week\\u2019s options\\u2026<br><span class=\\"small\\">This page updates by itself.</span></div>";waitForSlate();}',
   ' else{$("cards").innerHTML=opts.map(function(o){',
   '  var chips=(o.tags||[]).map(function(t){var k=t.kind==="hot"?" hot":(t.kind==="new"?" new":"");return "<span class=\\"chip"+k+"\\">"+esc(t.label||t)+"</span>";}).join("");',
   '  if(o.mode==="explore")chips="<span class=\\"chip explore\\">Something new</span>"+chips;else if(o.mode==="tried")chips="<span class=\\"chip\\">Tried &amp; tested</span>"+chips;',
@@ -766,7 +799,14 @@ var PAGE_JS = [
   ' $("aheadBox").innerHTML=ba.length?"<div class=\\"ahead\\"><h2>Book ahead</h2><ul>"+ba.map(function(b){return "<li>"+(b.html?safe(b.html):esc(b.text||b))+"</li>";}).join("")+"</ul></div>":"";',
   ' $("nudgeBox").innerHTML=S.nudge?"<p class=\\"nudge\\">"+esc(S.nudge)+"</p>":"";',
   ' $("foot").innerHTML=(S.footnote?esc(S.footnote)+"<br>":"")+"Votes and notes save to your own Google Sheet, so you both see them on any device.";',
-  ' refreshVotes();loadNotes();}',
+  ' if(opts.length){refreshVotes();loadNotes();}}',
+  // Poll while the first slate is being researched; stop as soon as it lands.
+  'var waiting=null,waitTries=0;',
+  'function waitForSlate(){if(waiting)return;waiting=setInterval(function(){waitTries++;if(waitTries>60){clearInterval(waiting);waiting=null;return;}',
+  ' google.script.run.withSuccessHandler(function(s){if(s&&s.options&&s.options.length){clearInterval(waiting);waiting=null;S=s;render();}}).getSlate();},45000);}',
+  // Coming back to the page (e.g. from the home screen) picks up a newer week.
+  'document.addEventListener("visibilitychange",function(){if(document.hidden||!ME)return;',
+  ' google.script.run.withSuccessHandler(function(s){if(s&&s.options&&s.options.length&&s.weekId!==S.weekId){S=s;histLoaded=false;render();}}).getSlate();});',
   // votes
   'function wireVotes(){Array.prototype.forEach.call(document.querySelectorAll("button.vote"),function(b){',
   ' var v=b.getAttribute("data-voter");if(v!==ME){b.disabled=true;return;}',

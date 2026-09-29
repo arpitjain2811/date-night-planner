@@ -39,10 +39,12 @@ Get these right, because they're expensive to discover later: **each person's di
 
 As soon as they confirm, do these two things in the same turn. The page setup takes them about five minutes, so let that overlap with your writing.
 
-**a. Send the voting page steps and the code file** (`references/voting-page.md`). Attach `webapp/Code.gs` if you can. It needs no edits. If browser automation is available and they'd like you to, do the clicks for them. They still approve Google's permission screen themselves.
+**First, create the folder `Date Night Planner`**. It's one quick call, and it must exist before they run the page's `setup`, which would otherwise make its own empty folder with the same name.
+
+**a. Send the voting page steps and the code file** (`references/voting-page.md`), with [script.new](https://script.new) as a clickable link. Attach `webapp/Code.gs` if you can. It needs no edits. If browser automation is available and they'd like you to, do the clicks for them. They still approve Google's permission screen themselves.
 
 **b. Write the folder.** Read `../weekly-run/references/drive.md` first. It covers plain files instead of Google Docs, newest copy wins, and no 4-byte emoji in JSON.
-1. Create the folder **`Date Night Planner`**, using exactly this name, because the page finds the folder by it.
+1. The folder already exists (above). Use exactly the name `Date Night Planner`, because the page finds the folder by it. If a second, empty folder with that name appears, it came from the page's `setup` running first. Ignore it: the page prefers the folder that holds `profile.md`.
 2. Write **`config.json`**: `{ "title": "Date Night", "voters": ["<name A>", "<name B>"], "photoFolder": "", "photoCount": 1, "voterAliases": {} }`
 3. Write the six memory files from `templates/`, filled **only from their answers**. `references/interview.md` §6 says what goes where. `sources.md` stays a stub, which the first run builds. `backlog.md` holds their own wishlist, and the runs add ideas.
 4. If you can run scripts, also write **`playbook.md`**: `python ../weekly-run/scripts/build_playbook.py > playbook.md`. It's a fallback for scheduled sessions that can't load the plugin. If you can't run scripts, skip it, because the first run writes it.
@@ -58,9 +60,9 @@ Then **run it once immediately**, if the scheduler allows. That run notices it's
 
 When they paste the web app URL:
 - Save it in `profile.md` → Delivery and schedule.
-- Check `page-status.json` in the folder. `setup-complete` means the script ran. A recent `lastServedAt` means the page opened. Don't fetch the URL yourself: Apps Script answers through a redirect that fetch tools don't follow. If something's off, use the troubleshooting table in `references/voting-page.md`.
+- Check `page-status.json` in the folder. `setup-complete` means the script ran. A recent `lastServedAt` means the page opened. A `lastError` explains a failed load. Don't fetch the URL yourself: Apps Script answers through a redirect that fetch tools don't follow. If something's off, use the troubleshooting table in `references/voting-page.md`.
 
-Until the first run publishes, the page shows "Nothing here yet". That's expected.
+Until the first run publishes, the page says the first options are on the way, and fills itself in when they land. They don't need to refresh. If they see Google's *"Sorry, unable to open the file"* page instead, they're signed in to several Google accounts: have them open the link in a private window or on their phone (troubleshooting table).
 
 ## 5. If the first run can't start in the background
 
@@ -70,7 +72,7 @@ If there's no scheduler, or it can't run a task immediately, build the first sla
 
 Keep it to about six lines. Don't recap the steps.
 
-- **The page link**, and: *"Open it on both phones, pick your name, and add it to your home screen."*
+- **The page link, as a clickable link**, and: *"Open it on both phones, pick your name, and add it to your home screen."*
 - **What's happening now:** *"I'm researching {city} for your first four options. They'll appear on the page within about 20 minutes, and you'll get a notification."*
 - **Every week:** *"Every {Wednesday} morning: fresh options, plus anything worth booking weeks ahead."*
 - **The two habits that make it good:** *"Tap 'in' on what appeals. After the weekend, add a line saying what you actually did, even if it was none of them. That's how it learns."*

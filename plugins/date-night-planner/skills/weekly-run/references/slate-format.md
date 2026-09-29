@@ -106,7 +106,7 @@ Written at setup. The page reads it, so keep it small:
 
 ## `page-status.json`: is the page alive?
 
-Written by the page when `setup` runs and when the page is opened (at most every 10 minutes). Use it to confirm a deployment worked, and to notice a page nobody opens any more.
+Written by the page when `setup` runs and when the page is opened (at most every 10 minutes). Use it to confirm a deployment worked, to notice a page nobody opens any more, and to spot load errors (`lastError`, which the page records instead of showing a raw error).
 
 ```json
 {
@@ -119,7 +119,9 @@ Written by the page when `setup` runs and when the page is opened (at most every
   "status": "setup-complete",
   "setupAt": "2031-05-10T18:02:11Z",
   "lastServedAt": "2031-05-14T07:41:30Z",
-  "servedWeekId": "2031-05-14"
+  "servedWeekId": "2031-05-14",
+  "lastError": "(only present if a page load failed)",
+  "lastErrorAt": "2031-05-14T07:40:02Z"
 }
 ```
 

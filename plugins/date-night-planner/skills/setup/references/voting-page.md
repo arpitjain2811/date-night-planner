@@ -23,11 +23,13 @@ Choose the smoothest way the environment allows:
 Send these as one short numbered message. Adapt the wording, but keep the order.
 
 > **Setting up your voting page (about 5 minutes, on a computer)**
-> 1. Open **script.new**, signed in to the Google account with the *Date Night Planner* folder. A blank project opens.
-> 2. Select all the sample code, delete it, and paste in the file I sent. Click **Save** (the disk icon). If you like, rename *Untitled project* to *Date Night*.
-> 3. In the toolbar, pick **setup** from the function menu and click **Run**. Google asks for permission: **Review permissions** → choose your account → *"Google hasn't verified this app"* → **Advanced** → **Go to Date Night (unsafe)** → **Allow**. It says "unverified" only because it's your own private script, not a published app.
+> 1. Open [script.new](https://script.new), signed in to the Google account with the *Date Night Planner* folder. A new, blank project opens. If you already have other Apps Script projects, leave them alone.
+> 2. Select all the sample code, delete it, and paste in the file I sent. Click **Save** (the disk icon). Rename *Untitled project* to *Date Night Planner* so it's easy to find later.
+> 3. In the toolbar, pick **setup** from the function menu and click **Run**. Google asks for permission: **Review permissions** → choose your account → *"Google hasn't verified this app"* → **Advanced** → **Go to Date Night Planner (unsafe)** → **Allow**. It says "unverified" only because it's your own private script, not a published app.
 > 4. Click **Deploy** (top right) → **New deployment** → the gear icon → **Web app**. Set *Execute as:* **Me** and *Who has access:* **Anyone**, then **Deploy**. Copy the **Web app URL**.
-> 5. Paste the URL here. Then open it on both phones, pick your name, and add it to your home screen.
+> 5. Paste the URL here. You can open it straight away: until the first options are ready, it says they're on the way and fills itself in, with no need to refresh. On both phones, pick your name and add it to your home screen.
+
+**Send every link as a clickable link** ([script.new](https://script.new), and later the page URL itself), never as bare text they have to copy.
 
 While they do this, write the folder and schedule the weekly run (SKILL.md §2–3).
 
@@ -49,6 +51,7 @@ Don't fetch the URL. Apps Script answers through a redirect that fetch tools don
 | `"configFound": false` | `config.json` is missing or not valid JSON. Rewrite it as plain `application/json` |
 | `lastServedAt` within the last few minutes | Someone opened the page |
 | `servedWeekId` equals the newest slate's date | The page is showing the right slate |
+| `lastError` with a recent `lastErrorAt` | The page hit an error while loading. The message says what. Fix it, or tell them it's resolved and to hard-refresh |
 
 Save the URL in `profile.md` → Delivery and schedule. It's private: anyone with the link can see the slate and vote, so never put it anywhere public.
 
@@ -63,4 +66,6 @@ Save the URL in `profile.md` → Delivery and schedule. It's private: anyone wit
 | Names on the buttons are wrong | Fix `voters` in `config.json`. The page picks up changes within about 5 minutes |
 | Photos don't appear | `photoFolder` must match a Drive folder name exactly and contain images. The photo list is cached for up to 6 hours |
 | Votes don't stick | Open the Sheet `Date Night votes` in the folder and check it has *Votes* and *Notes* tabs. Running `setup` again is safe and recreates anything missing |
+| Google's own page: *"Sorry, unable to open the file at this time"* | Almost always the browser is **signed in to more than one Google account**, and Google picks the wrong one. Open the link in a private/incognito window, or on a phone. That's also how their partner will use it. Or sign out of the other accounts. Nothing needs fixing in the script |
+| An old error keeps showing after it's been fixed | The browser is showing its earlier copy. Hard-refresh (Ctrl/Cmd + Shift + R), or open it in a private window. The page itself never shows raw script errors: if something fails, it says *"One moment…"* with a *Try again* button, and records the error in `page-status.json` → `lastError` |
 | They want to check it by hand | Open `<URL>?action=status` in a browser for a small health report |
