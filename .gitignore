@@ -1,0 +1,12 @@
+# Never commit a couple's planner data. It belongs in their own Drive folder.
+Date Night Planner/
+date-night-planner-data/
+profile.local.md
+feedback.json
+page-status.json
+/slate-*.json
+
+# Editor and OS clutter
+.DS_Store
+*.swp
+__pycache__/

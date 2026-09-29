@@ -1,0 +1,14 @@
+{
+  "name": "date-night-planner",
+  "description": "A date-night planner for couples that learns what you two actually enjoy.",
+  "owner": {
+    "name": "date-night-planner contributors"
+  },
+  "plugins": [
+    {
+      "name": "date-night-planner",
+      "source": "./plugins/date-night-planner",
+      "description": "Every week, a private voting page with a fresh slate of date ideas for your city. It learns from your votes and from what you actually did."
+    }
+  ]
+}

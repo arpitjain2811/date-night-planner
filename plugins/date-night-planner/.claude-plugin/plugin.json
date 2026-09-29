@@ -1,0 +1,11 @@
+{
+  "name": "date-night-planner",
+  "displayName": "Date Night Planner",
+  "version": "1.0.0",
+  "description": "Every week, a private voting page with a fresh slate of date ideas for your city: restaurants, shows, classes, outdoors, and things to book ahead. It learns from your votes and from what you actually did. One setup conversation, then it runs on its own.",
+  "author": {
+    "name": "date-night-planner contributors"
+  },
+  "license": "MIT",
+  "keywords": ["date night", "couples", "planning", "recommendations", "events", "restaurants", "weekly"]
+}

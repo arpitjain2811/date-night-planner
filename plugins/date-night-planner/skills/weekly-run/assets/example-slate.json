@@ -1,0 +1,96 @@
+{
+  "weekId": "2031-05-14",
+  "eyebrow": "Weekend of May 16-18",
+  "title": "Dry Saturday, wet Friday: one evening outside, the rest under a roof.",
+  "subtitle": "Friday turns to showers after six, so Friday stays indoors. Saturday and Sunday are dry and mild. Nothing is booked yet, and Sam's birthday is five weeks out, so the book-ahead list starts watching for it.",
+  "alert": "<b>The lantern walk's last weekend is May 29-31.</b> If this weekend doesn't work, that's the final chance this year.",
+  "context": [
+    { "label": "Friday", "value": "17 °C, showers from 6pm. An indoor night" },
+    { "label": "Saturday", "value": "24 °C, dry, sunset 8:08pm" },
+    { "label": "Sunday", "value": "26 °C, clear. The best day of the three" },
+    { "label": "Already booked", "value": "Nothing this weekend" }
+  ],
+  "options": [
+    {
+      "id": "1",
+      "title": "Night lantern walk at the botanical garden",
+      "mode": "explore",
+      "category": "outdoors",
+      "learningTags": ["outdoor", "seasonal", "walkable", "cheap", "scenic"],
+      "hook": "Two hundred paper lanterns strung through the gardens after dark, and one of the last two weekends before it's packed away for the year.",
+      "tags": [
+        { "label": "Final weekends", "kind": "hot" },
+        { "label": "Never done this", "kind": "new" },
+        { "label": "Walkable" }
+      ],
+      "fields": [
+        { "k": "When", "v": "Saturday: arrive 7:30pm, so you see it in dusk and in full dark. Runs to 10pm" },
+        { "k": "Book", "html": "<a href=\"https://example.org/lantern-walk\">Timed tickets</a>. Pick the 7:30 slot; the 8pm queue is the long one" },
+        { "k": "Cost", "v": "$18 per person" },
+        { "k": "Why", "v": "Your best-date answers were both evening walks, and this is the first dry Saturday in three weeks." },
+        { "k": "After", "v": "The dumpling bar at the garden gate stays open until 11." }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Salsa for beginners, Friday drop-in",
+      "mode": "explore",
+      "category": "class",
+      "learningTags": ["hands-on", "class", "participatory", "late-night", "indoor"],
+      "hook": "An hour of basic steps with no partner-swapping and no experience needed. Then the floor opens up and you can stay as long as you like.",
+      "tags": [
+        { "label": "Indoors, and it's raining" },
+        { "label": "No booking needed" }
+      ],
+      "fields": [
+        { "k": "When", "v": "Friday, class 8-9pm, social dancing until midnight" },
+        { "k": "Book", "html": "Walk in. <a href=\"https://example.org/salsa-dropin\">The dance studio by the station</a> (checked their schedule this morning)" },
+        { "k": "Cost", "v": "$18 per person, cash or card at the door" },
+        { "k": "Why", "v": "You both put 'doing over watching' at setup, and nothing hands-on has made it onto a weekend yet." },
+        { "k": "Weeknight?", "v": "Same class runs Thursdays if Friday fills up." }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Trivia at the corner pub",
+      "mode": "tried",
+      "category": "games",
+      "learningTags": ["games", "cheap", "walkable", "spontaneous-friendly"],
+      "hook": "The cheap, easy one. Nothing to book, ten minutes' walk, and you came second last time.",
+      "tags": [
+        { "label": "Nothing to arrange" },
+        { "label": "Under $25 total" }
+      ],
+      "fields": [
+        { "k": "When", "v": "Sunday 6pm, done by 8" },
+        { "k": "Book", "v": "Just turn up. Tables go by 5:45" },
+        { "k": "Cost", "v": "Free to play. Food and drinks around $20 per person" },
+        { "k": "Why", "v": "Back to a known favorite: your April note said 'we need a rematch'." }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Rooftop tapas, back to the terrace",
+      "mode": "tried",
+      "category": "food",
+      "learningTags": ["spanish", "scenic", "splurge", "two-part-evening"],
+      "hook": "The clearest evening of the weekend, on the terrace you liked in March, while the long light lasts.",
+      "tags": [
+        { "label": "Best weather of the weekend" }
+      ],
+      "fields": [
+        { "k": "When", "v": "Sunday, 7:30pm table, so you catch the 8:09 sunset" },
+        { "k": "Book", "html": "Reserve on <a href=\"https://example.org/rooftop-tapas\">their site</a>. Terrace tables book up by Friday. Phone as a backup: (555) 010-0142" },
+        { "k": "Cost", "v": "About $55 per person with a drink each" },
+        { "k": "Diet", "v": "The patatas bravas and the grilled halloumi are both shellfish-free; ask them to keep the romesco separate." },
+        { "k": "Why", "v": "Your one 'loved it' dinner this spring. It's been two months." }
+      ]
+    }
+  ],
+  "bookAhead": [
+    { "html": "<b>Jazz festival weekend passes</b> go on sale Tue May 20 at 10am, $65 per person. Last year they were gone by Thursday. The trio you both named at setup is on the Saturday bill." },
+    { "html": "<b>Sam's birthday (June 20)</b>: the chef's counter at the waterfront restaurant books exactly 30 days out, which means a <b>May 21</b> booking." }
+  ],
+  "photoSeed": 12,
+  "footnote": "Built Wed May 14. No notes came in for last weekend, so the two votes for the market were read as 'liked but not done'. Tell me if you went. Verified this morning: the lantern walk dates and price on the garden's own page, the studio's Friday class on their schedule, and the jazz festival on-sale on the festival's site. The ticketing connector was down, so the festival was checked by hand. Weather from the national forecast, issued 5am. Question for you: is a Friday class still realistic now that work runs late on Fridays?"
+}
