@@ -31,7 +31,7 @@
  */
 
 var PLANNER_FOLDER = 'Date Night Planner';   // must match the planner's Drive folder
-var VERSION = '1.0.0';
+var VERSION = '1.1.0';
 
 var SLATE_RE = /^slate-(\d{4}-\d{2}-\d{2})\.json$/;
 var HISTORY_WEEKS = 26;       // weeks shown on the History tab

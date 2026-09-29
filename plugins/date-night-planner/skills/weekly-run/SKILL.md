@@ -72,6 +72,8 @@ Anything in `profile.md` → House rules overrides the defaults here. Read the H
 
 Read the six memory files (`profile.md`, `sources.md`, `radar.md`, `backlog.md`, `weights.md`, `history.md`), plus `config.json`, `feedback.json` and `page-status.json`. Start with **"Notes for the next run"** at the top of `backlog.md`. It's the previous run's message to you.
 
+**Early runs finish the setup.** Setup is deliberately quick and leaves the research to you. If `sources.md` is still a stub, `history.md` has no weeks, or `profile.md` says the past-bookings head start is `pending`, read `references/first-runs.md` and follow it alongside this procedure. It also covers what to do if the newest slate is less than four days old: don't replace it.
+
 **Keep the playbook current.** If this skill is loaded (not just `playbook.md`) and the version line at the top of `playbook.md` is older than this plugin's version, regenerate it with `python scripts/build_playbook.py > playbook.md` and write it back to the folder. Scheduled sessions that can't load the plugin follow that file.
 
 If the folder can't be reached, stop and say so. In a conversation, offer to help find it, or to run setup. Never build a slate from nothing and call it theirs.
@@ -257,6 +259,7 @@ In a scheduled run, finish with two or three sentences on what you picked and wh
 
 ## References
 
+- `references/first-runs.md`: what the first few runs do to finish setup (city sources, the past-bookings head start, seeding the backlog), and when not to republish
 - `references/learning.md`: turning votes, notes and other evidence into item scores and tag weights. Covers the update rubric, the evidence-worth table, normalization and decay, and hypotheses on probation
 - `references/slate-format.md`: the slate JSON, `feedback.json`, `config.json` and `page-status.json`
 - `references/drive.md`: working reliably with the Google Drive folder

@@ -68,6 +68,7 @@ _Learned taste lives in `weights.md`, and it wins when the two disagree._
 - **Voting page URL:** {{https://script.google.com/macros/s/…/exec}} (private: never share publicly)
 - **Weekly run:** {{Wednesdays ~7am, time zone}} · approval: {{automatic}}
 - **Weekly email with the link:** {{off, or the addresses to send to}}
+- **Past-bookings head start:** {{pending · declined · done YYYY-MM-DD}}
 
 ## House rules
 

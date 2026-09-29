@@ -15,15 +15,16 @@ One step, in whichever app you use:
 - **Claude app** (desktop or web): **Customize → Plugins → Add marketplace**, enter `arpitjain2811/date-night-planner`, then click **Install** on *Date Night Planner*.
 - **Claude Code:** `/plugin install date-night-planner --marketplace arpitjain2811/date-night-planner`
 
-## Set up (once, about 15 minutes)
+## Set up (once, about 10 minutes)
 
 Say **"set up date night planning"**, or run `/date-night-planner:setup`. Claude will:
 
-1. **Ask a few questions, with suggested answers:** your names, neighborhood, usual date nights, each person's diet, budget, key dates, hard no's, best dates so far, and what you're into. Skip anything you like.
-2. **Build your memory folder** in Google Drive (`Date Night Planner`). It researches your city's listings and venues and suggests a dozen ideas to keep or drop.
-3. **Walk you through your voting page.** You paste one file into Google Apps Script and click Deploy. About five minutes on a computer, and no editing needed.
-4. **Publish your first slate**, so the page has this week's options the moment you open it.
-5. **Schedule the weekly run** (Wednesday morning by default).
+1. **Ask a few quick questions**, with suggested answers where they make sense: your names, your city, your usual date nights, each person's diet, budget, key dates, hard no's, and a rough idea of what you enjoy. Skip anything you like. Rough answers are fine, because it learns your real taste from what you pick and what you actually do.
+2. **Create your memory folder** in Google Drive (`Date Night Planner`).
+3. **Walk you through your voting page.** You paste one file into Google Apps Script and click Deploy. About five minutes on a computer, with no editing.
+4. **Schedule the weekly run** (Wednesday morning by default), **and start the first one straight away.** That run researches your city and puts your first options on the page, usually within about 20 minutes.
+
+Setup doesn't do any research itself, which is why it's quick. The first few weekly runs fill in the rest: local sources, a head start from past bookings (if you allow it), and a growing list of ideas.
 
 After that there's nothing to run and nothing to remember. Open the page, tap "in", and after the weekend write a line about what you did.
 
@@ -62,7 +63,7 @@ plugins/date-night-planner/
     │   └── webapp/Code.gs               the voting page (one file, Google Apps Script)
     └── weekly-run/                      the engine the weekly schedule runs (hidden from menus)
         ├── SKILL.md                     the weekly procedure
-        ├── references/                  learning, file formats, Drive, memory files
+        ├── references/                  first runs, learning, file formats, Drive, memory files
         ├── scripts/                     validate / render a slate, build the playbook
         └── assets/example-slate.json
 ```

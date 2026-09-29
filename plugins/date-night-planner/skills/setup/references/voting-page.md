@@ -29,7 +29,7 @@ Send these as one short numbered message. Adapt the wording, but keep the order.
 > 4. Click **Deploy** (top right) → **New deployment** → the gear icon → **Web app**. Set *Execute as:* **Me** and *Who has access:* **Anyone**, then **Deploy**. Copy the **Web app URL**.
 > 5. Paste the URL here. Then open it on both phones, pick your name, and add it to your home screen.
 
-While they do this, build the first slate (SKILL.md step 4).
+While they do this, write the folder and schedule the weekly run (SKILL.md §2–3).
 
 ### If you can drive their browser
 

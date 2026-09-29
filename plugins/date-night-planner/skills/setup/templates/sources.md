@@ -1,6 +1,8 @@
 # Sources for {{city}}
 
-_Built at setup by researching the city. Last verified: YYYY-MM-DD. The weekly run checks every "every run" source, plus at least two from the rotation, rotating which two._
+**Status:** stub _(stub → partial → complete; the first weekly runs research this, see the weekly-run skill's `references/first-runs.md`)_
+
+_Last verified: YYYY-MM-DD. The weekly run checks every "every run" source, plus at least two from the rotation, rotating which two._
 
 ## Where we already look
 

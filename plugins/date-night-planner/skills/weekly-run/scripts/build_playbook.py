@@ -15,7 +15,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 SKILL = os.path.dirname(HERE)
 PLUGIN = os.path.dirname(os.path.dirname(SKILL))
-PARTS = ["references/learning.md", "references/slate-format.md",
+PARTS = ["references/first-runs.md", "references/learning.md", "references/slate-format.md",
          "references/drive.md", "references/memory-files.md"]
 
 

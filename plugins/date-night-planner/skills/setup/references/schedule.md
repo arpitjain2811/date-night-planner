@@ -42,11 +42,16 @@ Finish with two or three sentences on what you picked and why.
 
 `{EMAIL LINE}`: leave it empty, or if they chose weekly email, use: ` Then email {ADDRESSES} a two-line note with the headline and the page link: {URL}.`
 
+## Run it once, right away
+
+If the scheduler can run a task immediately ("run now", or "fire"), do it as soon as the task exists. That first run is where the real setup work happens: it builds the city's sources, uses the past-bookings head start if they allowed it, and publishes the first slate (see `../../weekly-run/references/first-runs.md`). Setup stays quick, the first options land on the page within about 20 minutes, and the pipeline is proven before the first Wednesday. That run won't publish again if the scheduled run follows within four days.
+
+If it can't run immediately, build the first slate in the conversation instead (setup SKILL.md §5).
+
 ## After creating it
 
 - Record it in `profile.md` → Delivery and schedule: the day, the time and time zone, and the approval setting.
 - Tell them in one line when the first automatic run happens.
-- **Test run (optional):** if the scheduler can fire a task immediately and they're keen, do it after the first slate is live. It will publish a second slate for the same week, which the page shows instead. Usually that's not worth it on setup day. The interactive first slate already proved the pipeline.
 
 ## If a run fails
 
